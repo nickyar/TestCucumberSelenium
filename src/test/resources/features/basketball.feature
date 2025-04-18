@@ -4,7 +4,7 @@ Feature: Basketball
 #    Given I use "Chrome" as a browser
     Given I use "Edge" as a browser
     And I navigate to basketball website "https://membership.basketballengland.co.uk/NewSupporterAccount"
-    When I enter my date of birth "20/03/1995"
+    When I enter my date of birth "20/03/2000"
     And I enter my first name "Nick"
     And I enter my last name "Ghadiri"
     And I enter my email address "ghad6@gmail.com"
