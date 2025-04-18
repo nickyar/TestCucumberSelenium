@@ -35,7 +35,7 @@ Feature: Basketball
     Then I should see error message "<errorMessage>"
 
     Examples:
-      | browser | dateOfBirth | firstName | lastName   | email             | confirmEmail       | password  | confirmPassword | errorMessage                         |
-      | Edge    | 20/03/1985  | Nick      |            | test2@example.com | test2@example.com  | 123QweAsd | 123QweAsd       | Last Name is required                |
-      | Chrome  | 20/03/1985  | Adam      | Johansson  | test3@example.com | wrong2@example.com | 123QweAsd | 123QweAsd       | Confirm Email Address does not match |
-      | Chrome  | 20/03/1985  | John      | Asvaltsson | test3@example.com | test3@example.com  | 123QweAsd | NoPass          | Password did not match               |
+      | browser | dateOfBirth | firstName | lastName  | email             | confirmEmail       | password  | confirmPassword | errorMessage                         |
+      | Edge    | 20/03/1985  | Nick      |           | test2@example.com | test2@example.com  | 123QweAsd | 123QweAsd       | Last Name is required                |
+      | Chrome  | 20/03/1985  | Adam      | Johansson | test3@example.com | wrong2@example.com | 123QweAsd | 123QweAsd       | Confirm Email Address does not match |
+      | Chrome  | 20/03/1985  | John      | Avaltsson | test3@example.com | test3@example.com  | 123QweAsd | NoPass          | Password did not match               |
