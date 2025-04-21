@@ -20,6 +20,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.print.DocFlavor;
 import java.time.Duration;
+import java.time.Instant;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -41,12 +42,18 @@ public class steps {
 
     @io.cucumber.java.en.And("I navigate to basketball website {string}")
     public void iNavigateToBasketballWebsite(String arg0) {
+        //Wait method - Implicit Wait
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://membership.basketballengland.co.uk/NewSupporterAccount");
         driver.manage().window().maximize();
     }
 
     @io.cucumber.java.en.When("I enter my date of birth {string}")
     public void iEnterMyDateOfBirth(String dateOfBirth) {
+        //Wait for the logo - Explicit Wait
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement logWait = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[src='/images/BE-LOGO-BE-INSPIRED.svg']")));
+        System.out.println("The Logo is found and shown. We continue testing");
         driver.findElement(By.cssSelector("input[name='DateOfBirth']")).sendKeys(dateOfBirth);
     }
 
@@ -80,10 +87,20 @@ public class steps {
         driver.findElement(By.cssSelector("input[name='ConfirmPassword']")).sendKeys(confirmPassword);
     }
 
-    @io.cucumber.java.en.And("I tick Terms and Conditions")
-    public void iTickTermsAndConditions() {
-        driver.findElement(By.xpath("//label[@for='sign_up_25']")).click();
+    @io.cucumber.java.en.And("I {string} Terms and Conditions")
+    public void iTermsAndConditions(String tickSelector) {
+        if (tickSelector.equalsIgnoreCase("tick")) {
+            driver.findElement(By.xpath("//label[@for='sign_up_25']")).click();
+        } else {
+            System.out.println("Terms and Condition must be checked");
+        }
     }
+//    This works for Terms and Conditions
+//    @io.cucumber.java.en.And("I tick Terms and Conditions")
+//    public void iTickTermsAndConditions() {
+//
+//        driver.findElement(By.xpath("//label[@for='sign_up_25']")).click();
+//    }
 
     @io.cucumber.java.en.And("I tick I am adult")
     public void iTickIAmAdult() {
