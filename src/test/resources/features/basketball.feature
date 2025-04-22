@@ -6,8 +6,8 @@ Feature: Basketball
     When I enter my date of birth "20/03/2000"
     And I enter my first name "Nick"
     And I enter my last name "Ghadiri"
-    And I enter my email address "ghad10@gmail.com"
-    And I confirm my email address "ghad10@gmail.com"
+    And I enter my email address "ghad12@gmail.com"
+    And I confirm my email address "ghad12@gmail.com"
     And I enter my password "123QWEasd"
     And I confirm my password "123QWEasd"
     When I "tick" Terms and Conditions

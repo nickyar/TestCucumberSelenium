@@ -6,10 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -28,6 +25,7 @@ import static org.junit.Assert.assertTrue;
 public class steps {
     WebDriver driver;
     //  This works for the first part very well --> Basketball Feature
+//    String errorMessage = "tom";
 
     @io.cucumber.java.en.Given("I use {string} as a browser")
     public void iUseAsABrowser(String browser) {
@@ -116,6 +114,17 @@ public class steps {
     public void iPressSubmissionButton() throws InterruptedException {
         driver.findElement(By.cssSelector("input[value='CONFIRM AND JOIN']")).click();
         Thread.sleep(2000);
+
+//        if (assertTrue(errorAppearance1.isDisplayed())) {
+//            String errorMessage = "Confirm Email Address does not match";
+//            System.out.println(errorMessage);
+//        }
+//        WebElement errorAppearance2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[data-val-required='Last Name is required']")));
+//            else if (assertTrue(errorAppearance2.isDisplayed())) {
+//            String errorMessage = "Last Name is required";
+//            System.out.println(errorMessage);
+//        } else {
+//        }
     }
 
     @io.cucumber.java.en.Then("Registration is complete")
@@ -123,5 +132,25 @@ public class steps {
         WebElement confirmationMessage = driver.findElement(By.xpath("//h2[text()='THANK YOU FOR CREATING AN ACCOUNT WITH BASKETBALL ENGLAND']"));
         assertTrue(confirmationMessage.isDisplayed());
         driver.quit();
+    }
+
+    @io.cucumber.java.en.Then("I should see error message {string}")
+    public void iShouldSeeErrorMessage(String expected) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        if (expected.equals("Last Name is required")) {
+
+//            String actual = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[data-val-required='Last Name is required']")));
+            String actual = driver.findElement(By.cssSelector("span[for='member_lastname']")).getText();
+            assertEquals(expected, actual);
+            System.out.println("Last Name is required");
+        }
+        else if (expected.equals("Confirm Email Address does not match")) {
+//            String actual = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='signup_form']/div[6]/div[2]/div/span/span")));
+            String actual = driver.findElement(By.xpath("//*[@id='signup_form']/div[6]/div[2]/div/span/span")).getText();
+
+            assertEquals(expected, actual);
+            System.out.println("Confirm Email Address does not match");
+        } else  {
+        }
     }
 }
